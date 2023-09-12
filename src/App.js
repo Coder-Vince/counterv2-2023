@@ -1,23 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+import AddCounter from "./components/AddCounter";
+import Counter from "./components/Counter";
+import Headers from "./components/Headers";
+import Footer from "./components/Footer";
 
 function App() {
+  const [counters, setCounters] = useState([0]);
+
+  const addButton = () => {
+    const newCounter = [...counters];
+    newCounter.push(0);
+    setCounters(newCounter);
+    console.log(counters);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Headers />
+      <AddCounter addButton={addButton} counters={counters} />
+      <Counter counters={counters} setCounters={setCounters} />
+      <Footer />
     </div>
   );
 }
